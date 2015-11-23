@@ -1,0 +1,6 @@
+INSERT INTO `users`(`user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_rights`) VALUES ('Leo', 'Rudin', 'leorudin@gmx.ch', '$2y$10$vsIj8tyFArH9sJYcziBvT.l1WW4ujc32mba5AxVXxk5vNI9PjG6IW', 'admin');
+INSERT INTO `semesters`(`user_id`, `semester_name`) VALUES (1,'Semester 2014-2015');
+INSERT INTO `semesters`(`user_id`, `semester_name`) VALUES (1,'Semester 2015-2016');
+INSERT INTO `subjects`(`user_id`, `semester_id`, `subject_counting`, `subject_counts_to_average`, `subject_name`) VALUES (1, 1, 1, 1, 'Naturwissenschaften');
+INSERT INTO `grades`(`user_id`, `subject_id`, `grade_value`, `grade_counting`, `grade_name`, `grade_description`) VALUES (1, 1, 5.43, 1, 'Naturwissenschaftspruefung 1', 'Diese Prüfung war sehr gut');
+INSERT INTO `grades`(`user_id`, `subject_id`, `grade_value`, `grade_counting`, `grade_name`, `grade_description`) VALUES (1, 1, 2.65, 1.5, 'Naturwissenschaftspruefung 2', 'Diese Prüfung war nicht sehr gut');
