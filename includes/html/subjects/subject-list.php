@@ -21,7 +21,7 @@
             <div class="list-item">
                 <h3><?php echo $subject['subject_name']; ?> <small><?php echo $subject['subject_average']; ?></small></h3>
                 <div class="tool-buttons hide">
-                    <a href="#"><button class="btn btn-primary"><i class="fa fa-pencil"></i></button></a>
+                    <a href="edit.php?type=subject&semester=<?php echo $_GET['semester']; ?>&subject=<?php echo $subject['subject_id']; ?>"><button class="btn btn-primary"><i class="fa fa-pencil"></i></button></a>
                     <button class="btn btn-danger" data-id="<?php echo $subject['subject_id']; ?>"><i class="fa fa-trash-o"></i></button>
                 </div>
                 <div class="clearfix"></div>

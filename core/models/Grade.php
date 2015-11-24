@@ -35,6 +35,22 @@ class Grade {
 
     }
 
+    public function update_grade ($data) {
+
+        global $db;
+
+        $update_data = array (
+            'grade_value' => $data['grade_value'],
+            'grade_counting' => $data['grade_counting'],
+            'grade_date' => $data['grade_date'],
+            'grade_name' => $data['grade_name'],
+            'grade_description' => $data['grade_description']
+        );
+
+        return $db->update('grades', $update_data);
+
+    }
+
     public function delete_grade ($grade_id) {
 
         global $db;
@@ -43,7 +59,16 @@ class Grade {
         return $db->delete('grades');
 
     }
-	
+
+    public function select_grade_by_id ($grade_id) {
+
+        global $db;
+
+        $db->where('grade_id', $grade_id);
+        return $db->getOne('grades');
+
+    }
+
 	public function select_grade_with_user_and_grade_id ($user_id, $grade_id) {
 	
 		global $db;

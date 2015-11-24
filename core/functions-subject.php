@@ -42,11 +42,11 @@ function get_subjects_for_semester($semester_id) {
 
 }
 
-function get_current_semester_name ($semester_id) {
+function get_subject_by_id ($subject_id) {
 
-    global $m_semester;
-
-    return $m_semester->get_semester_name_by_id($semester_id)['semester_name'];
+    global $m_subject;
+    
+    return $m_subject->select_subject_by_id ( $subject_id );
 
 }
 
@@ -56,7 +56,7 @@ function insert_subject ($data) {
 
     if ( $m_subject->insert_subject($data) ) {
         set_message( sprintf( $lang->translate('success_add_item'), 'subject', $data['subject_name'] ) , 'success' );
-        header ('Location: dashboard.php?semester=' . $data['semester_id']);
+        header ('Location: dashboard.php?semester=' . $data['semester_id'] );
     } else {
         set_message( sprintf( $lang->translate('error_insert'), 'subject' ) );
     }
@@ -68,6 +68,19 @@ function get_subject_name ($subject_id) {
     global $m_subject;
 
     return $m_subject->get_subject_name_by_id($subject_id)['subject_name'];
+
+}
+
+function update_subject ($data) {
+
+    global $m_subject, $lang;
+
+    if ( $m_subject->update_subject($data) ) {
+        set_message( $lang->translate('success_saving'), 'success' );
+        header ('Location: dashboard.php?semester=' . $data['semester_id'] );
+    } else {
+        set_message( $lang->translate('error_updating') );
+    }
 
 }
 

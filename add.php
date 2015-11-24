@@ -17,7 +17,7 @@ global $lang;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Dashboard</title>
+    <title>Add</title>
 
     <?php include_once (dirname( __FILE__ ) . '/includes/html/header-scripts.php'); ?>
 

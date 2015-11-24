@@ -20,7 +20,7 @@
         <div class="list-item">
             <h3><?php echo $grade['grade_name']; ?> <small><?php print_date($grade['grade_date']); ?></small> </h3>
             <div class="tool-buttons hide">
-                <button class="btn btn-primary"><i class="fa fa-pencil"></i></button>
+                <a href="edit.php?type=grade&semester=<?php echo $_GET['semester']; ?>&subject=<?php echo $_GET['subject']; ?>&grade=<?php echo $grade['grade_id']; ?>"><button class="btn btn-primary"><i class="fa fa-pencil"></i></button></a>
                 <button class="btn btn-danger" data-id="<?php echo $grade['grade_id']; ?>"><i class="fa fa-trash-o"></i></button>
             </div>
             <div class="clearfix"></div>

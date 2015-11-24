@@ -14,6 +14,15 @@ class Semester {
         return $db->get ("semesters");
 
     }
+    
+    public function select_semester_by_id ($semester_id) {
+        
+        global $db;
+        
+        $db->where ("semester_id", $semester_id);
+        return $db->getOne ("semesters");
+        
+    }
 
     public function get_semester_name_by_id ($semester_id) {
 
@@ -43,6 +52,19 @@ class Semester {
 
         $db->where('semester_id', $semester_id);
         return $db->delete('semesters');
+
+    }
+
+    public function update_semester ($data) {
+
+        global $db;
+
+        $update_data = array (
+            'semester_name' => $data['semester_name']
+        );
+
+        $db->where ('semester_id', $data['semester_id']);
+        return $db->update('semesters', $update_data);
 
     }
 	

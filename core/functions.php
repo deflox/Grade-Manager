@@ -22,13 +22,16 @@ function is_post_submitted() {
  * @param $name:   Name of post value.
  * @return string: Value of post value.
  */
-function get_post($name) {
+function get_post($name, $ext_item = null) {
 
-    if ( isset ( $_POST[$name] ) )
-        return $_POST[$name];
-    else
-        return '';
-
+	if ( $ext_item !== null && !isset($_POST[$name]) ) {
+		return $ext_item;
+	} else if ( isset($_POST[$name]) ) {
+		return $_POST[$name];
+	} else {
+		return '';
+	}	
+	
 }
 
 /**
@@ -100,16 +103,29 @@ function all_grades_zero ($grades) {
 
 }
 
-function get_drop_down ($elements, $post_name, $input_name, $class_name = 'form-control') {
+function get_drop_down ($elements, $post_name, $input_name, $class_name = 'form-control', $ext_item = null) {
 
     $html = '<label for="' . $post_name . '">' . $input_name . '</label>';
     $html .= '<select id="' . $post_name . '" class="' . $class_name . '" name="' . $post_name . '" >';
+
+
 
     if ( isset($_POST[$post_name]) ) {
 
         foreach ($elements as $key => $element) {
 
             if ( $key == $_POST[$post_name] )
+                $html .= '<option value="' . $key . '" selected="selected">' . $element . '</option>';
+            else
+                $html .= '<option value="' . $key . '">' . $element . '</option>';
+
+        }
+
+    } else if ( $ext_item !== null && !isset($_POST[$post_name]) ) {
+
+        foreach ($elements as $key => $element) {
+
+            if ( $key == $ext_item )
                 $html .= '<option value="' . $key . '" selected="selected">' . $element . '</option>';
             else
                 $html .= '<option value="' . $key . '">' . $element . '</option>';
@@ -156,6 +172,26 @@ function get_add_content ($params) {
             include_once (dirname(dirname( __FILE__ )) . '/includes/html/subjects/add-subject.php');
         } else if ( isset($params['type']) && $params['type'] == 'grade' && isset ($params['semester']) && isset($params['subject']) && count($params) == 3 ) {
             include_once (dirname(dirname( __FILE__ )) . '/includes/html/grades/add-grade.php');
+        } else {
+            header ('Location: dashboard.php');
+        }
+
+    } else {
+        header ('Location: dashboard.php');
+    }
+
+}
+
+function get_edit_content ($params) {
+
+    if ( isset($params['type'])  ) {
+
+        if ( isset($params['type']) && $params['type'] == 'semester' && isset($params['semester']) && count($params) == 2 ) {
+            include_once (dirname(dirname( __FILE__ )) . '/includes/html/semesters/edit-semester.php');
+        } else if ( isset($params['type']) && $params['type'] == 'subject' && isset($params['semester']) && isset($params['subject']) && count($params) == 3 ) {
+            include_once (dirname(dirname( __FILE__ )) . '/includes/html/subjects/edit-subject.php');
+        } else if ( isset($params['type']) && $params['type'] == 'grade' && isset ($params['semester']) && isset($params['subject']) && isset($params['grade']) && count($params) == 4 ) {
+            include_once (dirname(dirname( __FILE__ )) . '/includes/html/grades/edit-grade.php');
         } else {
             header ('Location: dashboard.php');
         }

@@ -76,6 +76,22 @@ function get_semesters_for_user () {
 
 }
 
+function get_semester_by_id ($semester_id) {
+
+    global $m_semester;
+    
+    return $m_semester->select_semester_by_id($semester_id);
+
+}
+
+function get_current_semester_name ($semester_id) {
+
+    global $m_semester;
+
+    return $m_semester->get_semester_name_by_id($semester_id)['semester_name'];
+
+}
+
 function insert_semester ($data) {
 
     global $m_semester, $lang;
@@ -85,6 +101,19 @@ function insert_semester ($data) {
         header ('Location: dashboard.php');
     } else {
         set_message( sprintf( $lang->translate('error_insert'), 'semester' ) );
+    }
+
+}
+
+function update_semester ($data) {
+
+    global $m_semester, $lang;
+
+    if ( $m_semester->update_semester($data) ) {
+        set_message( $lang->translate('success_saving') , 'success' );
+        header ('Location: dashboard.php');
+    } else {
+        set_message( $lang->translate('error_updating') );
     }
 
 }

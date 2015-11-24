@@ -27,12 +27,21 @@ class Subject {
 
     }
 
+    public function select_subject_by_id ($subject_id) {
+    
+        global $db;
+    
+        $db->where ("subject_id", $subject_id);
+        return $db->getOne("subjects");
+    
+    }
+    
     public function get_subject_name_by_id ($subject_id) {
 
         global $db;
 
         $db->where ("subject_id", $subject_id);
-        return $db->getONe("subjects", "subject_name");
+        return $db->getOne("subjects", "subject_name");
 
     }
 
@@ -58,6 +67,21 @@ class Subject {
 
         $db->where('subject_id', $subject_id);
         return $db->delete('subjects');
+
+    }
+
+    public function update_subject ($data) {
+
+        global $db;
+
+        $update_data = array (
+            'subject_name' => $data['subject_name'],
+            'subject_counting' => $data['subject_counting'],
+            'subject_counts_to_average' => $data['subject_counts_to_average']
+        );
+
+        $db->where ("subject_id", $data['subject_id']);
+        return $db->update('subjects', $update_data);
 
     }
 	

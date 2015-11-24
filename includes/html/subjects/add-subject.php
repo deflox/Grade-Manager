@@ -9,7 +9,6 @@ if ( is_post_submitted() ) {
         insert_subject($_POST);
 
     }
-
 }
 
 ?>

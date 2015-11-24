@@ -18,16 +18,8 @@ if ( is_post_submitted() ) {
 		
 		}
 	
-	} else {
-
-        $_POST['user_email']       = $_SESSION['user_email'];
-        $_POST['user_lastname']    = $_SESSION['user_lastname'];
-        $_POST['user_language']    = $_SESSION['user_language'];
-        $_POST['user_firstname']   = $_SESSION['user_firstname'];
-        $_POST['user_date_format'] = $_SESSION['user_date_format'];
-
-	}
-	
+	} 
+ 
 	if ( isset($_POST['save_password_change'] ) ) {
 		
 		if ( validate_user_password_change($_POST) ) {
@@ -37,14 +29,6 @@ if ( is_post_submitted() ) {
 		}			
 		
 	}
-
-} else {
-
-    $_POST['user_email']       = $_SESSION['user_email'];
-    $_POST['user_lastname']    = $_SESSION['user_lastname'];
-    $_POST['user_language']    = $_SESSION['user_language'];
-	$_POST['user_firstname']   = $_SESSION['user_firstname'];
-    $_POST['user_date_format'] = $_SESSION['user_date_format'];
 
 }
 
@@ -79,7 +63,7 @@ if ( is_post_submitted() ) {
 	
 		<div class="form-group">
             <label for="user_email"><?php echo $lang->translate('input_description_email'); ?>:</label>
-            <input type="email" class="form-control" id="user_email" name="user_email" value="<?php echo get_post('user_email'); ?>">
+            <input type="email" class="form-control" id="user_email" name="user_email" value="<?php echo get_post('user_email', $_SESSION['user_email']); ?>">
         </div>
 		
 		<div class="row">
@@ -88,7 +72,7 @@ if ( is_post_submitted() ) {
 				
 				<div class="form-group">
 					<label for="user_firstname"><?php echo $lang->translate('input_description_firstname'); ?>:</label>
-					<input type="text" class="form-control" id="user_firstname" name="user_firstname" value="<?php echo get_post('user_firstname'); ?>">
+					<input type="text" class="form-control" id="user_firstname" name="user_firstname" value="<?php echo get_post('user_firstname' , $_SESSION['user_firstname']); ?>">
 				</div>
 				
 			</div>
@@ -96,7 +80,7 @@ if ( is_post_submitted() ) {
 			
 				<div class="form-group">
 					<label for="user_lastname"><?php echo $lang->translate('input_description_lastname'); ?>:</label>
-					<input type="text" class="form-control" id="user_lastname" name="user_lastname" value="<?php echo get_post('user_lastname'); ?>">
+					<input type="text" class="form-control" id="user_lastname" name="user_lastname" value="<?php echo get_post('user_lastname', $_SESSION['user_lastname']); ?>">
 				</div>
 			
 			</div>
@@ -107,12 +91,12 @@ if ( is_post_submitted() ) {
 			
 			<div class="col-md-6">
 
-                <?php echo get_drop_down(array('de_DE' => 'Deutsch (Deutschland)', 'en_US' => 'English (USA)'), 'user_language', $lang->translate('input_description_settings_language') . ':'); ?>
+                <?php echo get_drop_down(array('de_DE' => 'Deutsch (Deutschland)', 'en_US' => 'English (USA)'), 'user_language', $lang->translate('input_description_settings_language') . ':', 'form-control', $_SESSION['user_language']); ?>
 				
 			</div>
 			<div class="col-md-6">
 
-                <?php echo get_drop_down(array('Y-m-d' => 'yyyy-mm-dd', 'Y/m/d' => 'yyyy/mm/dd', 'Y.m.d' => 'yyyy.mm.dd', 'd-m-Y' => 'dd-mm-yyyy', 'd/m/Y' => 'dd/mm/yyyy', 'd.m.Y' => 'dd.mm.yyyy', 'm/d/Y' => 'mm/dd/yyyy'), 'user_date_format', $lang->translate('input_description_settings_date_format') . ':'); ?>
+                <?php echo get_drop_down(array('Y-m-d' => 'yyyy-mm-dd', 'Y/m/d' => 'yyyy/mm/dd', 'Y.m.d' => 'yyyy.mm.dd', 'd-m-Y' => 'dd-mm-yyyy', 'd/m/Y' => 'dd/mm/yyyy', 'd.m.Y' => 'dd.mm.yyyy', 'm/d/Y' => 'mm/dd/yyyy'), 'user_date_format', $lang->translate('input_description_settings_date_format') . ':', 'form-control', $_SESSION['user_date_format']); ?>
 
 			</div>
 			
